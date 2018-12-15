@@ -1,4 +1,5 @@
 package małotacezar;
+
 import java.util.Scanner;
 
 /**
@@ -14,8 +15,8 @@ public class Cezar {
         int key = 13; //klucz 
 
         String word = in.nextLine();
-        if (checkWord(word)) { //sprawdza czy zdanie jest poprawne
-            System.out.println("Zaszyfrowany tekst:");
+        if (checkWord(word) && checkKey(key)) { //sprawdza czy klucz i zdanie jest poprawne
+            System.out.println("Zaszyfrowany tekst kluczem " + key + " :");
             encode(word, key); //koduje zdanie za pomoca szyfru cezara
         }
     }
@@ -34,15 +35,16 @@ public class Cezar {
     }
 
     /*
-    Funckja isSpace() sprawdza czy char jest spacją. 
-    Przyjmuje jako argument symbol (char)
-    Jeżeli tak zwraca true, jeżeli nie zwraca false.
+    Funkcja checkKey() sprawdza klucz względem wielokrotności 26 lub 0,
+    tak aby wynik kodowania uległ zmienie względem wartości pocztkowej.
+    Przyjnuje jako argument klucz (Integer).
+    Jeżeli klucz jest poprawny zwraca true, jeżeli nie jest poprawny wywołuje wyjatek.
      */
-    static boolean isSpace(char a) {
-        if (a == ' ') {
+    static boolean checkKey(int key) {
+        if (key != 0 && key % 26 != 0) {
             return true;
         } else {
-            return false;
+            throw new IllegalArgumentException("Wpisz poprawny klucz. Ten klucz nie zmienia wyniku");
         }
     }
 
@@ -54,11 +56,11 @@ public class Cezar {
     static void encode(String word, int key) {
         String code = "";
         for (int i = 0; i < word.length(); i++) {
-            if (isSpace(word.charAt(i))) { //sprawdza czy znak jest spacją
+            if (word.charAt(i)==' ') { //sprawdza czy znak jest spacją. Jeżeli tak przepisuje.
                 code += ' ';
                 continue;
             }
-            key %= 26;
+            key %= 26; // ilość znaków od A do Z
             int c = word.charAt(i) + key; //dodaje do wartości znaku wartość klucza
 
             if (c >= 'A' && c <= 'Z') {
