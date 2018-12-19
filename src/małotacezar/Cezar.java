@@ -1,5 +1,6 @@
 package małotacezar;
 
+import static java.awt.SystemColor.text;
 import java.util.Scanner;
 
 /**
@@ -19,6 +20,10 @@ public class Cezar {
             System.out.println("Zaszyfrowany tekst kluczem " + key + " :");
             encode(word, key); //koduje zdanie za pomoca szyfru cezara
         }
+        /*
+        ----------------------------------------
+         */
+        beta("ADAM",1);
     }
 
     /*
@@ -56,7 +61,7 @@ public class Cezar {
     static void encode(String word, int key) {
         String code = "";
         for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i)==' ') { //sprawdza czy znak jest spacją. Jeżeli tak przepisuje.
+            if (word.charAt(i) == ' ') { //sprawdza czy znak jest spacją. Jeżeli tak przepisuje.
                 code += ' ';
                 continue;
             }
@@ -74,5 +79,33 @@ public class Cezar {
             }
         }
         System.out.println(code); //wyświetlamy wynik
+    }
+
+    /*
+    ----------------------------------------------------------------------------
+    Funkcja beta() koduje zdanie za pomoca szyfru cezara z ustalonym alfabetem.
+    Zwraca zaszyfrowany tekst w konsoli.
+     */
+    static String beta(String word, int key) {
+        String alfa = "ABCDEFGHIJKLMNOPRSTUWVXYZ"; //alafbet
+        int alfalen = alfa.length(); //długość alfabetu
+        
+        //String s = ""; //wynik końcowy
+        StringBuilder s = new StringBuilder();//wynik końcowy
+
+        key%=alfalen; //klucz o odpowieniej długości
+        
+        for (int i = 0; i < word.length(); ++i) {
+            char ch = word.charAt(i);
+            int idx = alfa.indexOf(ch);
+
+            idx = (idx + key + alfalen) % alfalen;
+            ch = alfa.charAt(idx);
+            //s += ch; //wolnijesza metoda konkatenacji
+            s.append(ch); //szybsza metoda stringBuilder
+            
+        }
+        System.out.println(word + " = " + s);
+        return s.toString();
     }
 }
