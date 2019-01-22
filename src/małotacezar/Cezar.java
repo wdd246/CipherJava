@@ -9,6 +9,10 @@ import java.util.Scanner;
 public class Cezar {
 
     public static void main(String[] args) {
+        /*
+        ----------------------------------------
+        Program funkcyjny & encode(String slowo, int kluicz)
+         */
         Scanner in = new Scanner(System.in);
 
         System.out.println("Wpisz zdanie używając alfabetu łacińskiego oraz spacji (1-30 znaków)");
@@ -22,8 +26,19 @@ public class Cezar {
         }
         /*
         ----------------------------------------
+        Jedna funkcja beta(String slowo,int klucz)
          */
-        beta("ADAM",1);
+        beta("ADAM",13);
+        /*
+        ---------------------------------------
+        Klasa Cipher
+        */
+        Cipher szyfr = new Cipher(Alphabet.NormalENG);
+        
+        //szyfr.setOffset(13); //default 13
+        System.out.println("cipher.encrypt = "+szyfr.encrypt("ADAM"));
+        
+        System.out.println("cipher.encryptASCII = "+szyfr.encryptASCII("ADAM"));
     }
 
     /*
@@ -87,7 +102,7 @@ public class Cezar {
     Zwraca zaszyfrowany tekst w konsoli.
      */
     static String beta(String word, int key) {
-        String alfa = "ABCDEFGHIJKLMNOPRSTUWVXYZ"; //alafbet
+        String alfa = "ABCDEFGHIJKLMNOPQRSTUWVXYZ"; //alafbet
         int alfalen = alfa.length(); //długość alfabetu
         
         //String s = ""; //wynik końcowy
