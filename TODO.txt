@@ -3,3 +3,7 @@ if(word.matches("["+alphabet+"]*"){
 }
 
 Testy jednostkowe
+
+DECRYPT
+
+ENCRYPT NA PODSTAWIENIE
