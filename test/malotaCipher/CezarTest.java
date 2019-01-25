@@ -5,7 +5,7 @@
  */
 package malotaCipher;
 
-import malotaCipher.Cezar;
+import malotaCipher.Main;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -17,7 +17,7 @@ public class CezarTest {
 
     @Test
     public void testBeta() {
-        assertEquals("BEBN",Cezar.beta("ADAM",1));
+        assertEquals("BEBN",Main.beta("ADAM",1));
     }
     //TODO: MORE TESTS
 }

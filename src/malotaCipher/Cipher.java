@@ -5,16 +5,17 @@ package malotaCipher;
 public class Cipher {
 
     private int key;
-    private String alfa = "ABCDEFGHIJKLMNOPQRSTUWVXYZ";
+    private String alfa;
     private CharProc cp;
 
     public Cipher(CharProc cp){
         this.cp = cp;
     }
 
-    public Cipher() {
+    public Cipher(){
+        
     }
-
+     
     public void setKey(int key) {
         this.key = key;
     }
@@ -22,7 +23,47 @@ public class Cipher {
     public int getKey() {
         return this.key;
     }
+    
+    public void setAlpha(String alfa){
+        this.alfa=alfa;
+    }
+    
+    public String getAlpha(){
+        return this.alfa;
+    }
+    
+//    public String decrypt(String string) {
+//        return process(string);
+//    }
+    
+    public String encrypt(String string){
+        return process(string);
+    }
 
+    public String process(String string) {
+        //String alfa = "ABCDEFGHIJKLMNOPQRSTUWVXYZ"; //alafbet
+        //int alfalen = alfa.length(); //długość alfabetu
+        
+        /*
+        if (!string.matches("["+alfa+"]*")) {
+            throw new IllegalArgumentException("Tekst zawiera znaki spoza ustalonego alfabetu.");
+        }
+        */
+        
+        //String s = ""; //wynik końcowy
+        StringBuilder s = new StringBuilder();//wynik końcowy
+
+        //this.key %= alfalen; //klucz o odpowieniej długości
+
+        for (int i = 0; i < string.length(); ++i) {
+            char ch = string.charAt(i);
+            ch = cp.process(ch);
+            s.append(ch); //szybsza metoda stringBuilder
+
+        }
+        return s.toString();
+    }
+    
 //    public String encryptASCII(String string, int key) {
 //        String code = "";
 //        for (int i = 0; i < string.length(); i++) {
@@ -46,33 +87,7 @@ public class Cipher {
 //        return code;
 //
 //    }
-    
-    String decrypt(String string) {
-        return process(string);
-    }
-    
-    public String encrypt(String string){
-        return process(string);
-    }
-
-    public String process(String string) {
-        //String alfa = "ABCDEFGHIJKLMNOPQRSTUWVXYZ"; //alafbet
-        int alfalen = alfa.length(); //długość alfabetu
-
-        //String s = ""; //wynik końcowy
-        StringBuilder s = new StringBuilder();//wynik końcowy
-
-        this.key %= alfalen; //klucz o odpowieniej długości
-
-        for (int i = 0; i < string.length(); ++i) {
-            char ch = string.charAt(i);
-            ch = cp.process(ch);
-            s.append(ch); //szybsza metoda stringBuilder
-
-        }
-        return s.toString();
-    }
-
+//
 //    String decryptASCII(String string, int key) {
 //        return encryptASCII(string,-this.key);
 //    }
